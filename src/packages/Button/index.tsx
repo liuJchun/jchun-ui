@@ -1,28 +1,50 @@
-/*
- * @Author: liujianchun
- * @Date: 2022-06-28 17:46:07
- * @LastEditTime: 2022-06-28 18:17:39
- * @LastEditors: your name
- * @Description:
- * @FilePath: \jchun-ui\src\packages\Button\index.tsx
- */
-
-import type { FC } from "react"
+import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react"
 import classNames from "classnames"
+import "./index.scss"
 
-type propsType = {
-    type: "link" | "primary" | "default"
+interface propsType {
+    btnType: "link" | "primary" | "default"
+    size: "large" | "middle" | "small"
     disabled: boolean
     href: string
+    children: React.ReactNode
+    className: string
 }
 
-const Button: FC<propsType> = ({ href, children, type }) => {
-    const className = classNames("btn", { "btn-link": true })
-    return <>{href ? <button className={className}>123</button> : null}</>
+type NativeButtonProps = propsType & ButtonHTMLAttributes<HTMLElement>
+type AnchorButtonProps = propsType & AnchorHTMLAttributes<HTMLElement>
+
+type ButtonPropsType = Partial<NativeButtonProps & AnchorButtonProps>
+
+const Button: FC<ButtonPropsType> = ({
+    className,
+    href,
+    children,
+    btnType,
+    disabled,
+    ...restProps
+}) => {
+    const classes = classNames("btn", className, {
+        [`btn-${btnType}`]: btnType,
+        disabled: disabled
+    })
+    return (
+        <>
+            {href && btnType === "link" ? (
+                <a href={href} {...restProps}>
+                    {children}
+                </a>
+            ) : (
+                <button className={classes} {...restProps}>
+                    {children}
+                </button>
+            )}
+        </>
+    )
 }
 
 Button.defaultProps = {
-    type: "link",
+    btnType: "default",
     disabled: false
 }
 

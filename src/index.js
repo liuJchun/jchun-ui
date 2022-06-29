@@ -1,11 +1,3 @@
-/*
- * @Author: liujianchun
- * @Date: 2022-06-09 16:17:30
- * @LastEditTime: 2022-06-09 17:04:27
- * @LastEditors: your name
- * @Description:
- * @FilePath: \jchun-ui\src\index.js
- */
 import "./styles/index"
 import React from "react"
 import ReactDOM from "react-dom/client"
