@@ -2,8 +2,9 @@ import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react"
 import classNames from "classnames"
 import "./index.scss"
 
+
 interface propsType {
-    btnType: "link" | "primary" | "default"
+    btnType: "link" | "primary" | "default" | "danger" 
     size: "large" | "middle" | "small"
     disabled: boolean
     href: string
@@ -21,21 +22,23 @@ const Button: FC<ButtonPropsType> = ({
     href,
     children,
     btnType,
+    size,
     disabled,
     ...restProps
 }) => {
     const classes = classNames("btn", className, {
         [`btn-${btnType}`]: btnType,
-        disabled: disabled
+        [`btn-${size}`]: size,
+        disabled: btnType === 'link' && disabled
     })
     return (
         <>
             {href && btnType === "link" ? (
-                <a href={href} {...restProps}>
+                <a href={href} className={classes} {...restProps}>
                     {children}
                 </a>
             ) : (
-                <button className={classes} {...restProps}>
+                <button className={classes} disabled={disabled} {...restProps}>
                     {children}
                 </button>
             )}
@@ -45,7 +48,8 @@ const Button: FC<ButtonPropsType> = ({
 
 Button.defaultProps = {
     btnType: "default",
-    disabled: false
+    size: "middle",
+    disabled: false,
 }
 
 export default Button
