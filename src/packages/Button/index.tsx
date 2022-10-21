@@ -1,10 +1,9 @@
 import React, { FC, ButtonHTMLAttributes, AnchorHTMLAttributes } from "react"
 import classNames from "classnames"
-import "./index.scss"
-
+import "./style/index.scss"
 
 interface propsType {
-    btnType: "link" | "primary" | "default" | "danger" 
+    btnType: "link" | "primary" | "default" | "danger"
     size: "large" | "middle" | "small"
     disabled: boolean
     href: string
@@ -29,7 +28,7 @@ const Button: FC<ButtonPropsType> = ({
     const classes = classNames("btn", className, {
         [`btn-${btnType}`]: btnType,
         [`btn-${size}`]: size,
-        disabled: btnType === 'link' && disabled
+        disabled: btnType === "link" && disabled,
     })
     return (
         <>
