@@ -3,10 +3,8 @@ import classNames from "classnames"
 
 import { MenuContext } from "./Menu"
 
-type modeType = "vertical" | "horizontal"
-
 export type MenuItemProps = {
-    index: number
+    index?: number
     disabled?: boolean
     className?: string
     style?: React.CSSProperties
@@ -25,8 +23,8 @@ const MenuItem: React.FC<MenuItemProps> = props => {
     })
 
     const handleClick = () => {
-        if (context.index !== index && !disabled) {
-            context.onSelect(index)
+        if ((index ?? false) && context.index !== index && !disabled) {
+            context.onSelect(index!)
         }
     }
 
@@ -36,6 +34,7 @@ const MenuItem: React.FC<MenuItemProps> = props => {
         </li>
     )
 }
+MenuItem.displayName = "MenuItem"
 
 MenuItem.defaultProps = {
     disabled: false,
