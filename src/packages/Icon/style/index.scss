@@ -1,3 +1,4 @@
+// @import "../../../styles/index.scss";
 @each $name, $color in $theme-colors {
     .icon-theme-#{$name} {
         color: $color;

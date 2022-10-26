@@ -3,7 +3,6 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon, FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
 import classNames from "classnames"
 import { fas } from "@fortawesome/free-solid-svg-icons"
-
 import "./style/index.scss"
 
 library.add(fas as any)
