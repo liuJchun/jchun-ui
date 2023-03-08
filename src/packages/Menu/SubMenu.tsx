@@ -1,10 +1,10 @@
-import React, { FC, FunctionComponentElement, useContext, useState } from "react"
-import Transition from "../Transition"
-import classNames from "classnames"
+import React, { FC, FunctionComponentElement, useContext, useState } from 'react'
+import Transition from '../Transition'
+import classNames from 'classnames'
 
-import { MenuItemProps } from "./MenuItem"
-import { MenuContext } from "./Menu"
-import Icon from "../Icon"
+import { MenuItemProps } from './MenuItem'
+import { MenuContext } from './Menu'
+import Icon from '../Icon'
 
 export interface SubMenuProps {
     index?: number
@@ -20,8 +20,8 @@ const SubMenu: FC<SubMenuProps> = props => {
 
     const [isOpen, setIsOpen] = useState<boolean>(false)
 
-    const classes = classNames("menu-item", "sub-menu", className, {
-        "is-active": menuContext.index === index,
+    const classes = classNames('menu-item', 'sub-menu', className, {
+        'is-active': menuContext.index === index,
     })
 
     let timer: any
@@ -37,13 +37,13 @@ const SubMenu: FC<SubMenuProps> = props => {
         setIsOpen(!isOpen)
     }
     const clickEvents =
-        menuContext.mode === "vertical"
+        menuContext.mode === 'vertical'
             ? {
                   onClick: handleClick,
               }
             : {}
     const hoverEvents =
-        menuContext.mode !== "vertical"
+        menuContext.mode !== 'vertical'
             ? {
                   onMouseEnter: (e: React.MouseEvent) => {
                       handleMouse(e, true)
@@ -55,21 +55,21 @@ const SubMenu: FC<SubMenuProps> = props => {
             : {}
 
     const renderChildren = () => {
-        const subMenuClasses = classNames("sub-menu-wrapper", {
-            "menu-opened": isOpen,
-            "sub-menu-horizontal": menuContext.mode === "horizontal",
-            "sub-menu-vertical": menuContext.mode === "vertical",
+        const subMenuClasses = classNames('sub-menu-wrapper', {
+            'menu-opened': isOpen,
+            'sub-menu-horizontal': menuContext.mode === 'horizontal',
+            'sub-menu-vertical': menuContext.mode === 'vertical',
         })
         const childrenElements = React.Children.map(
             children,
             (child: FunctionComponentElement<MenuItemProps>, i) => {
-                if (child.type.displayName === "MenuItem") {
+                if (child.type.displayName === 'MenuItem') {
                     return React.cloneElement(child, {
                         // index: 10 * index! + i,
                         ...child.props,
                     })
                 } else {
-                    console.error("warning: SubMenu has a child which is not a MenuItem component")
+                    console.error('warning: SubMenu has a child which is not a MenuItem component')
                 }
             }
         )
@@ -91,6 +91,6 @@ const SubMenu: FC<SubMenuProps> = props => {
     )
 }
 
-SubMenu.displayName = "SubMenu"
+SubMenu.displayName = 'SubMenu'
 
 export default SubMenu
